@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GateMint.Api/GateMint.Api.csproj" />
+    <Project Path="src/GateMint.Core/GateMint.Core.csproj" />
+    <Project Path="src/GateMint.Infrastructure/GateMint.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GateMint.IntegrationTests/GateMint.IntegrationTests.csproj" />
+    <Project Path="tests/GateMint.UnitTests/GateMint.UnitTests.csproj" />
+  </Folder>
+</Solution>
