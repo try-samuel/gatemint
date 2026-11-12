@@ -1,0 +1,24 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with: { dotnet-version: '10.0.x' }
+      - uses: actions/setup-node@v5
+        with: { node-version: '24', cache: npm, cache-dependency-path: src/GateMint.Web/package-lock.json }
+      - run: dotnet restore GateMint.slnx
+      - run: dotnet build GateMint.slnx --configuration Release --no-restore
+      - run: dotnet test GateMint.slnx --configuration Release --no-build --logger trx
+      - run: npm ci
+        working-directory: src/GateMint.Web
+      - run: npm run lint
+        working-directory: src/GateMint.Web
+      - run: npm run build
+        working-directory: src/GateMint.Web
+      - run: docker build -t gatemint:ci .
